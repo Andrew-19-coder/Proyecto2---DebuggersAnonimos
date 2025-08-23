@@ -33,8 +33,12 @@ private LocalDate fechaExpedicion;
         return fechaExpedicion;
     }
     private boolean licenciaVigente(){
-        LocalDate hoy = LocalDate.now();
+         LocalDate hoy = LocalDate.now();
+        if(this.fechaExpedicion.isAfter(hoy)){
+            return false;
+        }
         return fechaExpedicion.plusYears(6).isAfter(hoy);
+       
     }
     public boolean tieneLicencia(){
         if(licenciaConducir==null){
@@ -43,9 +47,18 @@ private LocalDate fechaExpedicion;
         if(!licenciaConducir.equals(cedula)){
             return false;
         }
+        LocalDate fechaMayorEdad = this.fechaNacimiento.plusYears(18);
+        if(this.fechaExpedicion.isBefore(fechaMayorEdad)){
+           return false;
+        }
         if(!licenciaVigente()){
             return false;
         }
+        
         return true;
     } 
+       
+     public void setFechaExpedicion(LocalDate fechaExpedicion) {
+        this.fechaExpedicion = fechaExpedicion;
+    }
 }
