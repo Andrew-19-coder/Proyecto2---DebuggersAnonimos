@@ -35,6 +35,7 @@ private LocalDate fechaExpedicion;
     private boolean licenciaVigente(){
         LocalDate hoy = LocalDate.now();
         return fechaExpedicion.plusYears(6).isAfter(hoy);
+       
     }
     public boolean tieneLicencia(){
         if(licenciaConducir==null){
